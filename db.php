@@ -18,7 +18,7 @@
         // }
       
 
-    }catch(PDOExecption $error){
+    }catch(PDOException $error){
         echo $error->getCode();
     }
 

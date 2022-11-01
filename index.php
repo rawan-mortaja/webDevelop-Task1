@@ -9,17 +9,17 @@
         $sql = "SELECT id , email ,phone , name from users where email = '$email' and  password = '$hasedPass' and is_admin = 1 ";
         $result = $con->prepare($sql);
         var_dump($result);
-        // if(mysqli_num_rows($result) > 0){
-        //     while($rows = mysqli_fetch_assoc($result)){
-        //         $_SESSION['name'] = $rows['name'];
-        //         $_SESSION['email'] = $rows['email'];
-        //         $_SESSION['id'] = $rows['id'];
-        //         $_SESSION['login'] = true;
-        //         header('Location:dashboard.php');
-        //         exit;
-        //     }
-        // }
-    }
+        $result->execute();
+        $count = $result->rowCount();
+        if ($count > 0) {
+            do {
+                $_SESSION['name'] = $data['name'];
+                $_SESSION['email'] = $data['email'];
+                $_SESSION['id'] = $data['id'];
+                $_SESSION['login'] = true;
+                header('Location:dashboard.php');
+            } while ($data = $result->fetch());
+        }
     
 ?>
 
